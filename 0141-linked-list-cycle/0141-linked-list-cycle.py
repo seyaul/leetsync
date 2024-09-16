@@ -6,11 +6,13 @@
 
 class Solution(object):
     def hasCycle(self, head):
-        visited = []
+        references = defaultdict(int)
         while head:
-            visited.append(head)
+            references[head.next] += 1
             head = head.next
-            if(head in visited):
+            if references[head] > 1:
+                for key in references:
+                    print(key.val, references[key])
                 return True
         return False
         
