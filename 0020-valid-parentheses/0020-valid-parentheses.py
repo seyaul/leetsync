@@ -4,15 +4,22 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        Map = {")": "(", "]": "[", "}": "{"}
         stack = []
-
-        for c in s:
-            if c not in Map:
-                stack.append(c)
-                continue
-            if not stack or stack[-1] != Map[c]:
-                return False
-            stack.pop()
-
-        return not stack
+        if len(s) == 0:
+            return True
+        elif len(s) % 2 != 0:
+            return False
+        for char in s:
+            if char == '[' or char == '(' or char == '{':
+                stack.append(char)
+            else:
+                if len(stack) == 0:
+                    return False
+                openP = stack.pop()
+                pair = openP + char
+                print(pair)
+                if pair != '()' and pair!='[]' and pair!='{}':
+                    return False
+        if len(stack) == 0:
+            return True
+        return False
